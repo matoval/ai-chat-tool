@@ -9,7 +9,7 @@ import json
 @click.option("--max-tokens", default=7, help="The maximum number of tokens to generate in the completion")
 @click.option("--temperature", default=0, help="What sampling temperature to use")
 
-def chatgpt_cli_tool(api_key, prompt, file, max_tokens, temperature):
+def main(api_key, prompt, file, max_tokens, temperature):
     """Make an api call to ChatGPT and write the respone to a file"""
     if api_key is None:
         raise click.ClickException("missing api key. Please pass an api key via --api-key")
@@ -30,8 +30,8 @@ def chatgpt_cli_tool(api_key, prompt, file, max_tokens, temperature):
         else:
             with open(file, 'w') as f:
                 f.write(json_response["choices"][0]["text"])
-                click.echo(json_response)
                 click.echo(f"Text written to {file}")
 
 if __name__ == '__main__':
-    chatgpt_cli_tool()
+    main()
+
