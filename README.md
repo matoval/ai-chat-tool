@@ -13,12 +13,12 @@ To use this tool you will need a ChatGPT api key.
 - **--api-key**
     - (required) ChatGPT api key to use to access ChatGPT.
 - **--file**
-    - (optional) File to write ChatGPT response to.
+    - (optional) File to write ChatGPT response to. Pass just the file(test.py) or the path and file(/first_dir/second_dir/test.py)
 - **--max-tokens**
     - (optional) The maximum number of tokens to generate in the completion.
 - **--temperature**
     - (optional) What sampling temperature to use.
-    
+
 ### Example
 - Use AI-Chat-Tool to create a Python function that checks for even numbers
 
@@ -27,7 +27,7 @@ To use this tool you will need a ChatGPT api key.
 python -m ai-chat-tool --api-key=$CHATGPTKEY --file=test.py --max-tokens=2000
 ```
 ```
-What can I do for you today?: Can you create a pyhton function that checks for even numbers?
+What can I do for you today?: Can you create a python function that checks for even numbers?
 Text written to test.py
 ```
 \

@@ -1,6 +1,7 @@
 import click
 import requests
 import json
+import os
 
 @click.command()
 @click.option("--api-key", help="Your api key for ChatGPT")
@@ -28,6 +29,11 @@ def main(api_key, prompt, file, max_tokens, temperature):
         if file is None:
             click.echo(json_response["choices"][0]["text"])
         else:
+            path, filename = os.path.split(file)
+
+            if not os.path.exists(path):
+                os.makedirs(path)
+
             with open(file, 'w') as f:
                 f.write(json_response["choices"][0]["text"])
                 click.echo(f"Text written to {file}")
