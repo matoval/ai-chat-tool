@@ -1,6 +1,12 @@
 # AI-Chat-Tool 
 AI-Chat-Tool is a tool that brings ChatGPT to the command line.
 
+This repo is for the Python package **ai-chat-tool**: https://pypi.org/project/ai-chat-tool/
+
+```python
+pip install ai-chat-tool
+```
+
 To use this tool you will need a ChatGPT api key.
 
 ### Options
