@@ -3,7 +3,6 @@ README.md
 setup.py
 ai-chat-tool/__init__.py
 ai-chat-tool/__main__.py
-ai-chat-tool/test.py
 ai_chat_tool.egg-info/PKG-INFO
 ai_chat_tool.egg-info/SOURCES.txt
 ai_chat_tool.egg-info/dependency_links.txt

@@ -31,12 +31,24 @@ def main(api_key, prompt, file, max_tokens, temperature):
         else:
             path, filename = os.path.split(file)
 
-            if not os.path.exists(path):
-                os.makedirs(path)
+            if ":" in file:
+                filename, line_number = filename.split(':')
+                click.echo(line_number)
+                click.echo(path)
+                click.echo(filename)
 
-            with open(file, 'w') as f:
-                f.write(json_response["choices"][0]["text"])
-                click.echo(f"Text written to {file}")
+                if not os.path.exists(path):
+                    os.makedirs(path)
+                with open(path + filename, 'w') as f:
+                    f.writelines(json_response["choices"][0]["text"])
+                    click.echo(f"Text written to {file}")
+            else:
+                if not os.path.exists(path):
+                    os.makedirs(path)
+
+                with open(file, 'w') as f:
+                    f.write(json_response["choices"][0]["text"])
+                    click.echo(f"Text written to {file}")
 
 if __name__ == '__main__':
     main()

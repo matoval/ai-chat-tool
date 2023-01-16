@@ -1,7 +1,8 @@
 Metadata-Version: 2.1
 Name: ai-chat-tool
-Version: 0.0.9
+Version: 0.0.10
 Summary: AI-Chat-Tool is a tool that brings ChatGPT to the command line
+Home-page: https://github.com/matoval/ai-chat-tool
 Author: matoval (Matthew Sandoval)
 Author-email: <matovalcode@gmail.com>
 Keywords: chatgpt,ai,chat
