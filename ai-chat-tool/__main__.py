@@ -9,8 +9,9 @@ import os
 @click.option("--file", help="File to write ChatGPT response to")
 @click.option("--max-tokens", default=7, help="The maximum number of tokens to generate in the completion")
 @click.option("--temperature", default=0, help="What sampling temperature to use")
+@click.option("--line", default=0, help="Line to start ChatGPT output")
 
-def main(api_key, prompt, file, max_tokens, temperature):
+def main(api_key, prompt, file, max_tokens, temperature, line):
     """Make an api call to ChatGPT and write the respone to a file"""
     if api_key is None:
         raise click.ClickException("missing api key. Please pass an api key via --api-key")
@@ -31,17 +32,30 @@ def main(api_key, prompt, file, max_tokens, temperature):
         else:
             path, filename = os.path.split(file)
 
-            if ":" in file:
-                filename, line_number = filename.split(':')
-                click.echo(line_number)
-                click.echo(path)
-                click.echo(filename)
+            line = int(line)
+
+            if line > 0:
 
                 if not os.path.exists(path):
                     os.makedirs(path)
-                with open(path + filename, 'w') as f:
-                    f.writelines(json_response["choices"][0]["text"])
-                    click.echo(f"Text written to {file}")
+                if not os.path.isfile(file):
+                    file_data = []
+                else:
+                    with open(path + '/' + filename, 'r') as f:
+                        file_data = f.readlines()
+
+                if len(file_data) < line:
+                    for l in range(line):
+                        if l + 1 > len(file_data):
+                            file_data.append('\n')
+                        else:
+                            file_data[l].lstrip()
+                
+                file_data[line - 1] = json_response["choices"][0]["text"].lstrip() + "\n"
+
+                with open(path + '/' + filename, 'w') as update_file:
+                    update_file.writelines(file_data)
+                    click.echo(f"Text written to {path + '/' + filename}")
             else:
                 if not os.path.exists(path):
                     os.makedirs(path)
